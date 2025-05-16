@@ -12,6 +12,7 @@ def categorize(score):
     else:
         return "Low"
 
+df['Momentum Score'] = df['Momentum Score'].str.replace('%', '').astype(float)
 df["Momentum Tier"] = df["Momentum Score"].apply(categorize)
 tier_counts = df["Momentum Tier"].value_counts()
 
@@ -23,4 +24,5 @@ plt.pie(tier_counts, labels=tier_counts.index, autopct='%1.1f%%',
         startangle=140, colors=['green', 'orange', 'red'][:len(tier_counts)], explode=explode)
 plt.title('Distribution of Momentum Tiers')
 plt.tight_layout()
+plt.savefig('Momentum Tiers.png')
 plt.show()
